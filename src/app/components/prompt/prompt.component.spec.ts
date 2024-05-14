@@ -42,4 +42,9 @@ describe('PromptComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have "Confirm" and "Cancel" buttons', () => {
+    const buttons = fixture.nativeElement.querySelectorAll('button');
+    expect(buttons.length).toBe(2);
+  });
 });
