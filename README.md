@@ -1,5 +1,7 @@
 # WeatherApplication
 
+Angular web application that fetches current weather data from OpenWeatherMap for any city worldwide. Users can input a city name and switch between metric and imperial units for temperature, wind speed, etc. If a city name is not unique, users will be prompted to clarify their selection.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
 ## Development server
