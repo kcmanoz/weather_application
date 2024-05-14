@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div class="search-form">
+      <div>
+        <label for="cityName">Enter your city name:</label>
+        <input
+          type="text"
+          id="cityName"
+          formControlName="cityName"
+          (change)="resetSelectedWeather()"
+        />
+      </div>
+      <div>
+        <label>Units:</label>
+        <input
+          type="radio"
+          formControlName="units"
+          value="metric"
+          (change)="resetSelectedWeather()"
+        />
+        Metric
+        <input
+          type="radio"
+          formControlName="units"
+          value="imperial"
+          (change)="resetSelectedWeather()"
+        />
+        Imperial
+      </div>
+      <button type="submit">Search</button>
+    </div>
+  </form>
+
+  <app-card
+    [weather]="selectedWeatherInfo"
+    [units]="units ?? undefined"
+  ></app-card>
+</div>

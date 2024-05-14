@@ -1,0 +1,39 @@
+<mat-card class="card" *ngIf="weather && units">
+  <mat-card-header>
+    <mat-card-title
+      >{{ weather.temp | transformUnitValue }}{{ unitMapper[units].tempUnit }}
+    </mat-card-title>
+    <mat-card-subtitle
+      >{{ weather.cityName }}, {{ weather.country }}</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div class="bold">
+      Feels like {{ weather.feelsLike | transformUnitValue
+      }}{{ unitMapper[units].tempUnit }}. {{ weatherDescription }}
+    </div>
+    <mat-divider></mat-divider>
+
+    <ul class="weather-items">
+      <li>
+        <div class="wind-line">
+          <span class="caption">Wind speed : </span>
+          {{ weather.windSpeed | transformUnitValue }}
+          {{ unitMapper[units].windSpeedUnit }}
+        </div>
+      </li>
+      <li>
+        <div class="wind-line">
+          <span class="caption">Pressure : </span>
+          {{ weather.pressure | transformUnitValue }}Pa
+        </div>
+      </li>
+      <li>
+        <div class="wind-line">
+          <span class="caption">Humidiy : </span>
+          {{ weather.humidity | transformUnitValue }}%
+        </div>
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>

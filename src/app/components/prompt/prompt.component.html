@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Pick your city</h2>
+<mat-dialog-content>
+  <label id="example-radio-group-label">
+    Since the searched city has multiple results, select your city</label
+  >
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [(ngModel)]="selectedWeatherInfo"
+  >
+    @for (weather of searchParamsWithData.weatherInfo; track weather.id) {
+    <mat-radio-button class="example-radio-button" [value]="weather"
+      >{{ weather.cityName }}, {{ weather.country }}</mat-radio-button
+    >
+    }
+  </mat-radio-group>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    primary
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="onConfirm()"
+  >
+    Confirm
+  </button>
+</mat-dialog-actions>

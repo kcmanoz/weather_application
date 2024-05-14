@@ -1,0 +1,38 @@
+import { Component, Input } from '@angular/core';
+import { WeatherInfo, WeatherUnit } from '../../utils/types';
+import { CommonModule } from '@angular/common';
+import { TransformUnitValuePipe } from '../../pipes/transform-unit-value.pipe';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+
+@Component({
+  selector: 'app-card',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TransformUnitValuePipe,
+    MatCardModule,
+    MatDividerModule,
+  ],
+  templateUrl: './card.component.html',
+  styleUrl: './card.component.scss',
+})
+export class CardComponent {
+  @Input() weather?: WeatherInfo;
+  @Input() units?: WeatherUnit;
+
+  public unitMapper = {
+    metric: {
+      tempUnit: '°C',
+      windSpeedUnit: 'm/s',
+    },
+    imperial: {
+      tempUnit: '°F',
+      windSpeedUnit: 'mi/h',
+    },
+  };
+
+  get weatherDescription() {
+    return this.weather?.weather.map((desc) => desc.description).join(', ');
+  }
+}
