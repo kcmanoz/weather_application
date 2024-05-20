@@ -17,14 +17,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
+  <button mat-button (click)="onConfirm()" mat-dialog-close>Confirm</button>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button
-    mat-button
-    primary
-    [mat-dialog-close]="true"
-    cdkFocusInitial
-    (click)="onConfirm()"
-  >
-    Confirm
-  </button>
 </mat-dialog-actions>

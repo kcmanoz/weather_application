@@ -1,15 +1,24 @@
 .card {
-  max-width: 400px;
-  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  background-color: #add8e6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.city {
+  font-weight: 500;
+  font-size: 18px;
+  color: rgb(62 62 62 / 74%);
 }
 
 .bold {
-  font-weight: 500;
-  margin-top: 10px;
+  font-weight: 600;
+  margin-top: 20px;
   margin-bottom: 10px;
+  color: #007bff;
 }
 
 .weather-items {

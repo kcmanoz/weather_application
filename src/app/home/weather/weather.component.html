@@ -1,33 +1,26 @@
 <div class="wrapper">
+  <h3>Weather Application</h3>
   <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
     <div class="search-form">
       <div>
-        <label for="cityName">Enter your city name:</label>
-        <input
-          type="text"
-          id="cityName"
-          formControlName="cityName"
-          (change)="resetSelectedWeather()"
-        />
+        <label for="cityName">Enter the city name:</label>
+        <input type="text" id="cityName" formControlName="cityName" />
+        <div
+          *ngIf="searchForm.controls.cityName.errors?.['required'] && searchForm.controls.cityName.touched"
+          class="error-message"
+        >
+          City name is required!
+        </div>
       </div>
       <div>
         <label>Units:</label>
-        <input
-          type="radio"
-          formControlName="units"
-          value="metric"
-          (change)="resetSelectedWeather()"
-        />
+        <input type="radio" formControlName="units" value="metric" />
         Metric
-        <input
-          type="radio"
-          formControlName="units"
-          value="imperial"
-          (change)="resetSelectedWeather()"
-        />
+        <input type="radio" formControlName="units" value="imperial" />
         Imperial
       </div>
-      <button type="submit">Search</button>
+      <button type="submit" [disabled]="!searchForm.valid">Search</button>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
     </div>
   </form>
 
@@ -35,4 +28,6 @@
     [weather]="selectedWeatherInfo"
     [units]="units ?? undefined"
   ></app-card>
+
+  <div *ngIf="isLoading" class="loading-spinner"></div>
 </div>

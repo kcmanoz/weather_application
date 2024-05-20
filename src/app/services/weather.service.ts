@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, catchError, throwError } from 'rxjs';
 import { PersistedSearchItem, WeatherInfo } from '../utils/types';
 
 const SEARCH_DATA_KEY = 'searched-data';
@@ -65,22 +65,23 @@ export class WeatherService {
           `/data/2.5/find?q=${cityName}&units=${units}&appid=${API_KEY}`
       )
       .pipe(
-        map((weatherData) => this.filterAndtransformWeatherData(weatherData))
+        map((weatherData) => this.filterAndtransformWeatherData(weatherData)),
+        catchError((error) => {
+          console.error('Error fetching weather data', error);
+          return throwError(() => new Error('Failed to fetch weather data'));
+        })
       );
+  }
+
+  getPersistedSearchInfo(): PersistedSearchItem | undefined {
+    const persistedSearchData = localStorage.getItem(SEARCH_DATA_KEY);
+
+    if (persistedSearchData === null) return undefined;
+
+    return JSON.parse(persistedSearchData);
   }
 
   saveSearchInfoToLocalStorage(data: PersistedSearchItem): void {
     localStorage.setItem(SEARCH_DATA_KEY, JSON.stringify(data));
-  }
-
-  getPersistedSearchInfo(): PersistedSearchItem | undefined {
-    const persistedItem = localStorage.getItem(SEARCH_DATA_KEY);
-
-    if (!persistedItem) return undefined;
-
-    const persistedSearchItem = JSON.parse(
-      persistedItem
-    ) as PersistedSearchItem;
-    return persistedSearchItem;
   }
 }

@@ -3,7 +3,7 @@
     <mat-card-title
       >{{ weather.temp | transformUnitValue }}{{ unitMapper[units].tempUnit }}
     </mat-card-title>
-    <mat-card-subtitle
+    <mat-card-subtitle class="city"
       >{{ weather.cityName }}, {{ weather.country }}</mat-card-subtitle
     >
   </mat-card-header>
