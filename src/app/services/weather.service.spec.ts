@@ -24,7 +24,7 @@ describe('WeatherService', () => {
     longitude: 0,
     minTemp: 0,
     maxTemp: 0,
-    weather: [{ main: 'Cloudy', description: 'Cloudy weather' }],
+    weather: [{ main: 'Cloudy', description: 'Cloudy weather', icon: '04d' }],
   };
 
   const mockPersistedData = {

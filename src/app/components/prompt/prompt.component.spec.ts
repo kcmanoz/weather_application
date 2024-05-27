@@ -32,7 +32,7 @@ describe('PromptComponent', () => {
         MatButtonModule,
         MatRadioModule,
         HttpClientModule,
-        BrowserAnimationsModule, // Add BrowserAnimationsModule here
+        BrowserAnimationsModule,
       ],
       declarations: [], // Remove PromptComponent from declarations array
       providers: [
@@ -90,7 +90,7 @@ describe('PromptComponent', () => {
       longitude: 0,
       minTemp: 0,
       maxTemp: 0,
-      weather: [{ main: 'Cloudy', description: 'Cloudy weather' }],
+      weather: [{ main: 'Cloudy', description: 'Cloudy weather', icon: '04d' }],
     };
 
     // Provide cityName and units along with weatherInfo

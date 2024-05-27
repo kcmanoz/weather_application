@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
     MatDividerModule,
   ],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.scss',
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
   @Input() weather?: WeatherInfo;
@@ -25,14 +25,20 @@ export class CardComponent {
     metric: {
       tempUnit: '°C',
       windSpeedUnit: 'm/s',
+      pressureUnit: 'hPa', // Add this line
     },
     imperial: {
       tempUnit: '°F',
       windSpeedUnit: 'mi/h',
+      pressureUnit: 'inHg', // Add this line
     },
   };
 
   get weatherDescription() {
     return this.weather?.weather.map((desc) => desc.description).join(', ');
+  }
+
+  getIconUrl(icon: string): string {
+    return `http://openweathermap.org/img/wn/${icon}@2x.png`;
   }
 }

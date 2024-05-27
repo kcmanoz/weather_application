@@ -60,6 +60,15 @@ export class WeatherComponent implements OnInit, OnDestroy {
       .subscribe((weatherData) => {
         this.selectedWeatherInfo = weatherData;
       });
+
+    // subscribe to changes in the units form control
+    this.searchForm.controls.units.valueChanges
+      .pipe(takeUntil(this.$_destory))
+      .subscribe((units) => {
+        if (this.cityName && units) {
+          this.updateWeatherUnits(units);
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -107,17 +116,41 @@ export class WeatherComponent implements OnInit, OnDestroy {
       });
   }
 
-  handlePersistedState() {
-    const presistedData = this.weatherService.getPersistedSearchInfo();
+  updateWeatherUnits(units: WeatherUnit) {
+    if (this.selectedWeatherInfo) {
+      this.isLoading = true;
+      this.error = undefined;
 
-    if (presistedData === undefined) return;
+      this.weatherService
+        .getWeatherInfo(this.selectedWeatherInfo.cityName, units)
+        .pipe(take(1))
+        .subscribe({
+          next: (weatherDataResponse) => {
+            const weatherData = weatherDataResponse;
+            if (weatherData.length > 0) {
+              this.stateService.selectedWeather.next(weatherData[0]);
+            }
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.error = 'Failed to fetch weather data. Please try again.';
+            this.isLoading = false;
+          },
+        });
+    }
+  }
+
+  handlePersistedState() {
+    const persistedData = this.weatherService.getPersistedSearchInfo();
+
+    if (persistedData === undefined) return;
 
     // update the component state
     this.searchForm.patchValue({
-      cityName: presistedData.cityName,
-      units: presistedData.units as WeatherUnit,
+      cityName: persistedData.cityName,
+      units: persistedData.units as WeatherUnit,
     });
-    this.stateService.selectedWeather.next(presistedData.weatherInfo);
+    this.stateService.selectedWeather.next(persistedData.weatherInfo);
   }
 
   resetSelectedWeather() {

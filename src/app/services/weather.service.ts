@@ -30,6 +30,7 @@ export class WeatherService {
       weather: weatherInfo.weather.map((data: any) => ({
         main: data.main,
         description: data.description,
+        icon: data.icon,
       })),
     }));
   }

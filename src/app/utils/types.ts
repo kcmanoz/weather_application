@@ -14,6 +14,7 @@ export interface WeatherInfo {
   weather: {
     main: string;
     description: string;
+    icon: string;
   }[];
 }
 
