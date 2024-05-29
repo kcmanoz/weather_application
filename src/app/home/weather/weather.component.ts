@@ -24,10 +24,10 @@ import { StateService } from '../../services/state.service';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, CardComponent],
   templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss'],
+  styleUrl: './weather.component.scss',
 })
 export class WeatherComponent implements OnInit, OnDestroy {
-  public $_destroy = new Subject<void>();
+  public $_destory = new Subject<void>();
   public searchForm = new FormGroup({
     cityName: new FormControl('', [Validators.required]),
     units: new FormControl<WeatherUnit>('metric', [Validators.required]),
@@ -56,14 +56,14 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
     // listen to selected weather info changed
     this.stateService.selectedWeather
-      .pipe(takeUntil(this.$_destroy))
+      .pipe(takeUntil(this.$_destory))
       .subscribe((weatherData) => {
         this.selectedWeatherInfo = weatherData;
       });
 
     // subscribe to changes in the units form control
     this.searchForm.controls.units.valueChanges
-      .pipe(takeUntil(this.$_destroy))
+      .pipe(takeUntil(this.$_destory))
       .subscribe((units) => {
         if (this.cityName && units) {
           this.updateWeatherUnits(units);
@@ -72,8 +72,8 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$_destroy.next();
-    this.$_destroy.complete();
+    this.$_destory.next();
+    this.$_destory.complete();
   }
 
   onSearch() {
@@ -129,13 +129,6 @@ export class WeatherComponent implements OnInit, OnDestroy {
             const weatherData = weatherDataResponse;
             if (weatherData.length > 0) {
               this.stateService.selectedWeather.next(weatherData[0]);
-              // Save to local storage
-              const persistedData: PersistedSearchItem = {
-                cityName: this.selectedWeatherInfo?.cityName || '', // Use optional chaining
-                units,
-                weatherInfo: weatherData[0],
-              };
-              this.weatherService.saveSearchInfoToLocalStorage(persistedData);
             }
             this.isLoading = false;
           },
