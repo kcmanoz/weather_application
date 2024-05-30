@@ -105,12 +105,19 @@ export class WeatherComponent implements OnInit, OnDestroy {
             });
           } else {
             this.stateService.selectedWeather.next(weatherData[0]);
+            // Save the new search info to local storage
+            this.weatherService.saveSearchInfoToLocalStorage({
+              cityName,
+              units,
+              weatherInfo: weatherData[0],
+            });
           }
 
           this.isLoading = false;
         },
         error: (err) => {
-          this.error = 'Failed to fetch weather data. Please try again.';
+          this.error =
+            'Unable to retrieve weather data. Please verify the city name and try again, or check your internet connection.';
           this.isLoading = false;
         },
       });
@@ -129,11 +136,18 @@ export class WeatherComponent implements OnInit, OnDestroy {
             const weatherData = weatherDataResponse;
             if (weatherData.length > 0) {
               this.stateService.selectedWeather.next(weatherData[0]);
+              // Save the updated weather info to local storage
+              this.weatherService.saveSearchInfoToLocalStorage({
+                units: units,
+                cityName: weatherData[0].cityName,
+                weatherInfo: weatherData[0],
+              });
             }
             this.isLoading = false;
           },
           error: (err) => {
-            this.error = 'Failed to fetch weather data. Please try again.';
+            this.error =
+              'Unable to retrieve weather data. Please verify the city name and try again, or check your internet connection.';
             this.isLoading = false;
           },
         });

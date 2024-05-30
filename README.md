@@ -1,6 +1,44 @@
-# WeatherApplication
+# Weather Application
 
-Angular web application that fetches current weather data from OpenWeatherMap for any city worldwide. Users can input a city name and switch between metric and imperial units for temperature, wind speed, etc. If a city name is not unique, users will be prompted to clarify their selection.
+## Overview
+
+This Weather Application is an Angular-based web application that allows users to search for weather information by city name. Users can view detailed weather information, including temperature, wind speed, pressure, and humidity, in either metric or imperial units. The application also saves the most recent search data in local storage, enabling quick access to previously searched information.
+
+## Components
+
+### Card Component
+
+Displays the weather information for the selected city. The component shows temperature, city name, country, weather description, wind speed, pressure, and humidity.
+
+### Prompt Component
+
+Handles scenarios where the searched city name returns multiple results. The user can select the correct city from a list of options.
+
+### Weather Component
+
+The main component where users can search for weather information. It includes a form for entering the city name and selecting the unit of measurement.
+
+## Services
+
+### StateService
+
+Manages the state of the application, including the currently selected weather information.
+
+### WeatherService
+
+Handles interactions with the weather API and manages saving and retrieving search data from local storage.
+
+## Pipes
+
+### TransformUnitValuePipe
+
+Transforms the weather values (temperature, wind speed, pressure) based on the selected unit (metric or imperial).
+
+## Local Storage
+
+The application uses local storage to save the most recent search data, allowing users to quickly access previously searched weather information without having to perform a new search.
+
+##
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
