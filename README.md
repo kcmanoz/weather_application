@@ -2,7 +2,11 @@
 
 ## Overview
 
-This Weather Application is an Angular-based web application that allows users to search for weather information by city name. Users can view detailed weather information, including temperature, wind speed, pressure, and humidity, in either metric or imperial units. The application also saves the most recent search data in local storage, enabling quick access to previously searched information.
+This Weather Application is an Angular-based web application that allows users to search for weather information by city name. The application uses the OpenWeatherMap API to fetch weather data. Users can view detailed weather information, including temperature, wind speed, pressure, and humidity, in either metric or imperial units. The application also saves the most recent search data in local storage, enabling quick access to previously searched information.
+
+### View live at:
+
+https://weather-app-ang-project.vercel.app
 
 ## Components
 

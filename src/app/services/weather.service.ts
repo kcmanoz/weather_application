@@ -4,7 +4,7 @@ import { Observable, map, catchError, throwError } from 'rxjs';
 import { PersistedSearchItem, WeatherInfo } from '../utils/types';
 
 const SEARCH_DATA_KEY = 'searched-data';
-const BASE_URL = 'http://api.openweathermap.org';
+const BASE_URL = 'https://api.openweathermap.org';
 const API_KEY = '1cb6ace31e50401f28b864f0b23fdc68';
 
 @Injectable({
